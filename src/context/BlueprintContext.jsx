@@ -3,7 +3,7 @@ import React, { createContext, useState, useContext, useEffect } from 'react';
 const BlueprintContext = createContext();
 
 export const BlueprintProvider = ({ children }) => {
-  // Dummy blueprint data
+  // Dummy blueprint data function
   const getDummyBlueprints = () => {
     return [
       {
@@ -130,6 +130,10 @@ export const BlueprintProvider = ({ children }) => {
     ];
   };
 
+  // End of dummy blueprint data function
+
+  // Blueprint data state
+
   const [blueprints, setBlueprints] = useState(() => {
     const saved = localStorage.getItem('blueprint_data');
     if (saved) {
@@ -145,6 +149,9 @@ export const BlueprintProvider = ({ children }) => {
     return dummyBlueprints;
   });
 
+  // End of blueprint data state
+
+  // Save blueprint data to local storage
   useEffect(() => {
     localStorage.setItem('blueprint_data', JSON.stringify(blueprints));
   }, [blueprints]);
@@ -159,20 +166,30 @@ export const BlueprintProvider = ({ children }) => {
     return blueprintEntry.id;
   };
 
+  // End of add blueprint function
+
+  // Get blueprint function
   const getBlueprint = (id) => {
     return blueprints.find(b => b.id === id);
   };
 
+  // End of get blueprint function
+
+  // Update blueprint function
   const updateBlueprint = (id, updatedBlueprint) => {
     setBlueprints(prev => prev.map(b => 
       b.id === id ? { ...b, ...updatedBlueprint } : b
     ));
   };
+  // End of update blueprint function
 
+  // Delete blueprint function
   const deleteBlueprint = (id) => {
     setBlueprints(prev => prev.filter(b => b.id !== id));
   };
+  // End of delete blueprint function
 
+  // Return blueprint context provider values
   return (
     <BlueprintContext.Provider value={{ 
       blueprints, 
@@ -186,5 +203,11 @@ export const BlueprintProvider = ({ children }) => {
   );
 };
 
+// End of blueprint context provider values
+
+// Export useBlueprints hook
 export const useBlueprints = () => useContext(BlueprintContext);
 
+// End of useBlueprints hook
+
+// End of BlueprintContext.jsx file

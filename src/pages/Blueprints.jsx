@@ -2,9 +2,15 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useBlueprints } from '../context/BlueprintContext';
 
+// Start of Blueprints component
+
 const Blueprints = () => {
   const { blueprints, deleteBlueprint } = useBlueprints();
   const navigate = useNavigate();
+
+  // End of Blueprints component
+
+  // Start of handleDelete function
 
   const handleDelete = (id, e) => {
     e.stopPropagation();
@@ -12,6 +18,10 @@ const Blueprints = () => {
       deleteBlueprint(id);
     }
   };
+
+  // End of handleDelete function
+
+  // Start of return statement
 
   return (
     <div className="container">
